@@ -1,40 +1,62 @@
 package Inventorymanagement;
 
-import java.util.Objects;
-
 //Item for the warehouse
 class Item {
 
+    private long id;
     private String name;
     private double price; //TODO: Find out what the difference between float and double is. Pro's and cons of using both
     private int stock;
 
+    private long getId(){
+        return id;
+    }
+
+    private void setId(long id){
+        this.id = id;
+    }
+
     String getName() {
         return name;
+    }
+
+    private void setName(String name) {
+        this.name = name;
     }
 
     double getPrice() {
         return price;
     }
 
+    private void setPrice(double price) {
+        this.price = price;
+    }
+
     int getStock() {
         return stock;
     }
 
-    double getTotalCost(){
-        return getPrice()*getStock();
-    }
-
-    void setName(String name) {
-        this.name = name;
-    }
-
-    void setPrice(double price) {
-        this.price = price;
-    }
-
-    void setStock(int stock) {
+    private void setStock(int stock) {
         this.stock = stock;
+    }
+
+    private void deductStock(long stock) {
+        if(this.stock - stock < 0){
+            throw new IllegalArgumentException("Not enough stock to deduct. Stock would be less than 0");
+        }
+    }
+
+    //Increase the stock by a certain amount
+    private void increaseStock(long stock){
+        this.stock += stock;
+    }
+
+    private boolean inStock(){
+        return stock > 0;
+    }
+
+    private double getTotalCost(){
+        return getPrice()*getStock();
     }
 
     @Override
@@ -49,11 +71,11 @@ class Item {
 
         Item item = (Item) o;
 
-        return getName().equals(item.getName());
+        return getId() == item.getId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName());
+        return Long.hashCode(id);
     }
 }
