@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 class Inventory {
 
-    private List<Inventory> warehouses = new ArrayList<>();
+    private List<Storage> stores = new ArrayList<>();
 
     void open(){
 
@@ -23,7 +23,7 @@ class Inventory {
                     printOptions();
                     option = scanner.nextInt();
 
-                    if (option <= 0 || option > 8) {
+                    if (option <= 0 || option > 9) {
                         throw new IllegalArgumentException();
                     }
 
@@ -42,7 +42,10 @@ class Inventory {
             } while (correct);
 
             switch (option) {
-                case 1: //TODO
+                case 1:
+                    for(Storage store : stores){
+                        store.printStock(); //TODO: what happens if there are no warehouses!
+                    }
                     break;
                 case 2: //TODO
                     break;
@@ -56,7 +59,9 @@ class Inventory {
                     break;
                 case 7: //TODO
                     break;
-                case 8:
+                case 8 : //TODO
+                    break;
+                case 9:
                     running = false;
             }
         } while(running);
@@ -70,7 +75,7 @@ class Inventory {
         System.out.println("5. Decrease stock");
         System.out.println("6. Add new item");
         System.out.println("7. Remove an item");
-        System.out.println("8. Close Inventory");
+        System.out.println("8. Add new store");
+        System.out.println("9. Close Inventory");
     }
-
 }

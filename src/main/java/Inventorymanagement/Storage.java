@@ -20,12 +20,13 @@ abstract class Storage {
         this.name = name;
     }
 
-    private void printStock(){
+    void printStock(){
         if(items.isEmpty()) {
             System.out.println("No items in stock");
             return;
         }
 
+        System.out.println("hello");
         for(Item item : items){
             System.out.println(item.getName() + " " + item.getPrice() + " " + item.getStock());
         }
